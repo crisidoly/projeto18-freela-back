@@ -21,7 +21,7 @@ export async function SignIn(req, res) {
 
     await db.query('INSERT INTO sessions ("userId", token) VALUES ($1, $2);', [user.rows[0].id, token]);
 
-    res.status(200).send({ token });
+    res.status(200).send({ token, userId: user.rows[0].id });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -44,7 +44,7 @@ export async function SignUp(req, res) {
         const passwordHash = bcrypt.hashSync(password, 10);
 
         const newUser = await db.query('INSERT INTO users (name, email, password, phone, cpf) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, email, passwordHash, phone, cpf]);
-
+        console.log(newUser)
         res.status(201).send(newUser.rows[0]);
     } catch (err) {
         res.status(500).send(err.message);

@@ -13,3 +13,9 @@ export const signInSchema = Joi.object({
     email: Joi.string().required().min(1).email(),
     password: Joi.string().required().min(1)        
 });
+
+export const catsSchema = Joi.object({
+    name: Joi.string().min(1),
+    photo: Joi.string(),
+    feature: Joi.string(), 
+  });
