@@ -19,3 +19,7 @@ export const catsSchema = Joi.object({
     photo: Joi.string(),
     feature: Joi.string(), 
   });
+
+  export const updateCatAvailabilitySchema = Joi.object({
+    active: Joi.boolean().required(),
+  });

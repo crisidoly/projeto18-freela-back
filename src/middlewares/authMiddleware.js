@@ -60,21 +60,3 @@ export async function signUpValidation(req, res, next) {
 
 }
 
-// export function authenticateUser(req, res, next) {
-//     const token = req.headers.authorization;
-  
-//     if (!token) {
-//       return res.status(401).json({ message: 'Acesso não autorizado. Token não fornecido.' });
-//     }
-  
-//     try {
-//       const decodedToken = jwt.verify(token, 'secreto'); 
-  
-//       req.user = decodedToken;
-  
-//       next();
-//     } catch (error) {
-//       return res.status(401).json({ message: 'Token inválido ou expirado.' });
-//     }
-//   }
-  
