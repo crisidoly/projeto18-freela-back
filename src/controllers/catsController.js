@@ -39,8 +39,8 @@ export async function getAvailableCats(req, res) {
 }
 
 export async function registerCat(req, res) {
-  const { name, photo, feature, userId } = req.body;
-
+  const { name, photo, feature } = req.body;
+  const userId = res.locals.userId
 
   try {
     const newCat = await db.query(

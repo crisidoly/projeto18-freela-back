@@ -22,7 +22,7 @@
       });
 
     router.put('/cats/:id/update-availability', ValidateToken, updateCatAvailability);
-    router.post('/register-cat', registerCat);
+    router.post('/register-cat', ValidateToken, registerCat);
     
 
     export default router;
