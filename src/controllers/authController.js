@@ -50,3 +50,34 @@ export async function SignUp(req, res) {
         res.status(500).send(err.message);
     }
 }
+
+
+export async function ValidateToken(req, res, next) {
+  const token = req.header('Authorization');
+
+  if (!token) {
+    return res.status(401).send('Token não fornecido');
+  }
+
+  const tokenWithoutBearer = token.replace('Bearer ', '');
+
+  try {
+    const sessions = await db.query('SELECT * FROM sessions WHERE token = $1', [tokenWithoutBearer]);
+
+    if (!sessions.rowCount) {
+      return res.status(401).send('Token inválido');
+    }
+
+    if (!sessions.rows || sessions.rows.length === 0) {
+      return res.status(401).send('Token inválido');
+    }
+
+    const userId = sessions.rows[0].userId;
+    res.locals.userId = userId;
+    next();
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
+
+

@@ -2,7 +2,8 @@ import db from '../database/databaseConnection.js';
 
 
 export async function getMyModels(req, res) {
-    const { userId } = res.locals;
+    const  userId  =  res.locals.userId;
+    console.log(userId)
     try {
         const myModels = await getModelsByUserIdDB(userId);
         res.send(myModels.rows)
@@ -20,3 +21,4 @@ export async function getMyModels(req, res) {
       throw error;
     }
   }
+  
